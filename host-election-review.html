@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review and Publish Election</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-center mb-6">Review and Publish Election</h1>
+    
+    <!-- Election Positions and Candidates Review -->
+    <div id="election-review" class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Positions and Candidates</h2>
+      <div id="positions-container"></div>
+    </div>
+
+    
+
+    <!-- Set Election Dates -->
+    <div class="mb-6">
+      <label for="start-date" class="block text-lg font-medium mb-2">Election Start Date</label>
+      <input type="date" id="start-date" class="block w-full p-2 border rounded mb-4">
+      <label for="end-date" class="block text-lg font-medium mb-2">Election End Date</label>
+      <input type="date" id="end-date" class="block w-full p-2 border rounded">
+    </div>
+
+    <!-- Publish Election Button -->
+    <div class="text-center mt-6">
+      <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" id="publish-election">Publish Election</button>
+    </div>
+  </div>
+
+  <script>
+    // Load the positions and candidates from the previous page (stored in localStorage)
+    const positions = JSON.parse(localStorage.getItem('positions')) || [];
+    const candidatesData = JSON.parse(localStorage.getItem('candidates')) || {};
+    const positionsContainer = document.getElementById('positions-container');
+
+    // Dynamically populate positions and their candidates
+    positions.forEach(position => {
+      const positionDiv = document.createElement('div');
+      positionDiv.className = 'mb-4';
+      positionDiv.innerHTML = `
+        <h3 class="text-lg font-semibold">${position}</h3>
+        <ul class="list-disc pl-6">
+          ${candidatesData[position].map(candidate => `<li>${candidate}</li>`).join('')}
+        </ul>
+      `;
+      positionsContainer.appendChild(positionDiv);
+    });
+
+    // Handle the Publish Election button click
+    document.getElementById('publish-election').addEventListener('click', () => {
+      const startDate = document.getElementById('start-date').value;
+      const endDate = document.getElementById('end-date').value;
+
+      if (!startDate || !endDate) {
+        alert('Please select both start and end dates!');
+        return;
+      }
+
+      // Handle the election publishing logic (e.g., save to the database or change status)
+      alert('Election Published Successfully!');
+      
+      // Optionally, store the start and end dates in localStorage or a database
+      localStorage.setItem('electionDates', JSON.stringify({ startDate, endDate }));
+
+      // Redirect to voting page or another page
+      window.location.href = 'voting-page.html';  // Example redirection
+    });
+  </script>
+</body>
+</html>
