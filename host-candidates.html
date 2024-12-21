@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Candidates</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex h-screen">
+    <main class="flex-1 p-8">
+      <h2 class="text-3xl font-bold mb-4">Enter Candidates for Election</h2>
+      
+      <div id="candidatesContainer" class="mb-6"></div>
+      
+      <button onclick="submitCandidates()" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Submit</button>
+    </main>
+  </div>
+
+  <script>
+    // Retrieve positions from localStorage
+    const positions = JSON.parse(localStorage.getItem('positions')) || [];
+    
+    // Check if there are any positions
+    if (positions.length === 0) {
+      alert("No positions found. Please go back and enter positions.");
+      window.location.href = 'host-positions.html';
+    }
+
+    // Dynamically create candidate input fields for each position
+    const candidatesContainer = document.getElementById('candidatesContainer');
+    
+    positions.forEach((position, index) => {
+      const positionDiv = document.createElement('div');
+      positionDiv.className = 'mb-6';
+      
+      const positionLabel = document.createElement('label');
+      positionLabel.className = 'block text-lg font-semibold mb-2';
+      positionLabel.innerText = `Enter candidates for ${position}`;
+      
+      const candidatesInput = document.createElement('input');
+      candidatesInput.type = 'text';
+      candidatesInput.className = 'w-full px-4 py-2 border border-gray-300 rounded mb-2';
+      candidatesInput.placeholder = `Enter candidates for ${position}`;
+      candidatesInput.id = `candidatesFor${index + 1}`;
+      
+      positionDiv.appendChild(positionLabel);
+      positionDiv.appendChild(candidatesInput);
+      
+      candidatesContainer.appendChild(positionDiv);
+    });
+
+    // Function to handle the submission of candidates
+    function submitCandidates() {
+      const allCandidates = [];
+
+      positions.forEach((position, index) => {
+        const candidatesInput = document.getElementById(`candidatesFor${index + 1}`);
+        if (candidatesInput && candidatesInput.value) {
+          allCandidates.push({
+            position: position,
+            candidates: candidatesInput.value.split(',').map(name => name.trim())
+          });
+        }
+      });
+
+      if (allCandidates.length === positions.length) {
+        // Handle successful submission here
+        console.log(allCandidates); // You can send this data to the server or handle it as needed
+        alert('Election setup completed!');
+      } else {
+        alert('Please enter candidates for all positions.');
+      }
+    }
+  </script>
+</body>
+</html>
