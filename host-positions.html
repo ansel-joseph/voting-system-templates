@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Host Positions</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex h-screen">
+    <main class="flex-1 p-8">
+      <h2 class="text-3xl font-bold mb-4">Enter Positions for Election</h2>
+      
+      <div class="mb-6">
+        <label for="electionTitle" class="block text-lg font-semibold mb-2">Election Title</label>
+        <input type="text" id="electionTitle" class="w-full px-4 py-2 border border-gray-300 rounded" placeholder="Enter the election title">
+      </div>
+      
+      <div id="positionsContainer" class="mb-6">
+        <label for="positions" class="block text-lg font-semibold mb-2">Enter Positions</label>
+        <input type="text" id="position1" class="w-full px-4 py-2 border border-gray-300 rounded mb-2" placeholder="Enter a position (e.g., Chairman)">
+        <button id="addPositionBtn" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Another Position</button>
+      </div>
+      
+      <button onclick="goToCandidates()" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Next</button>
+    </main>
+  </div>
+
+  <script>
+    let positionCount = 1;
+    
+    // Function to add another position input field
+    document.getElementById('addPositionBtn').addEventListener('click', function() {
+      positionCount++;
+      const positionInput = document.createElement('input');
+      positionInput.type = 'text';
+      positionInput.id = 'position' + positionCount;
+      positionInput.className = 'w-full px-4 py-2 border border-gray-300 rounded mb-2';
+      positionInput.placeholder = `Enter position ${positionCount}`;
+      document.getElementById('positionsContainer').appendChild(positionInput);
+    });
+
+    // Function to redirect to candidates page
+    function goToCandidates() {
+      const positions = [];
+      for (let i = 1; i <= positionCount; i++) {
+        const positionInput = document.getElementById('position' + i);
+        if (positionInput && positionInput.value) {
+          positions.push(positionInput.value);
+        }
+      }
+
+      // Check if positions are entered
+      if (positions.length > 0) {
+        // Store the positions in localStorage
+        localStorage.setItem('positions', JSON.stringify(positions));
+
+        // Redirect to the candidates page
+        window.location.href = 'host-candidates.html';
+      } else {
+        alert("Please enter at least one position.");
+      }
+    }
+  </script>
+</body>
+</html>
