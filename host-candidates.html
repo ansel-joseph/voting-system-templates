@@ -7,12 +7,17 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800">
+
+  <!-- Main Container -->
   <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold text-center mb-6">Enter Candidate Names</h1>
-    <form id="candidates-form">
-      <div id="positions-container"></div>
-      <div class="text-center mt-6">
-        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Submit</button>
+    <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">Enter Candidate Names</h1>
+
+    <!-- Candidate Entry Form -->
+    <form id="candidates-form" class="bg-white p-6 rounded-lg shadow-md">
+      <div id="positions-container" class="space-y-6"></div>
+      
+      <div class="text-center mt-8">
+        <button type="submit" class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Submit</button>
       </div>
     </form>
   </div>
@@ -28,20 +33,20 @@
       input.type = 'text';
       input.name = `candidates-${positionIndex}`;
       input.placeholder = 'Enter candidate name';
-      input.className = 'block w-full mt-2 p-2 border rounded';
+      input.className = 'block w-full mt-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500';
       candidatesDiv.appendChild(input);
     }
 
     // Dynamically populate positions and candidate inputs
     positions.forEach((position, index) => {
       const positionDiv = document.createElement('div');
-      positionDiv.className = 'mb-6';
+      positionDiv.className = 'mb-6 bg-gray-50 p-4 rounded-lg shadow-sm';
       positionDiv.innerHTML = `
-        <h2 class="text-xl font-semibold mb-2">${position}</h2>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">${position}</h2>
         <div id="candidates-${index}">
-          <input type="text" name="candidates-${index}" placeholder="Enter candidate name" class="block w-full p-2 border rounded">
+          <input type="text" name="candidates-${index}" placeholder="Enter candidate name" class="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2">
         </div>
-        <button type="button" class="bg-green-500 text-white mt-2 py-1 px-3 rounded hover:bg-green-600" onclick="addCandidateField(${index})">+ Add Candidate</button>
+        <button type="button" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200" onclick="addCandidateField(${index})">+ Add Candidate</button>
       `;
       positionsContainer.appendChild(positionDiv);
     });
@@ -64,5 +69,6 @@
       window.location.href = 'host-election-review.html'; // Change to your review page
     });
   </script>
+
 </body>
 </html>

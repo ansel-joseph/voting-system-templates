@@ -7,35 +7,38 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800">
+
+  <!-- Main Container -->
   <div class="flex h-screen">
-    <main class="flex-1 p-8">
-      <h2 class="text-3xl font-bold mb-4">Enter Positions for Election</h2>
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-white shadow-lg rounded-lg mx-auto mt-6 mb-6 w-full max-w-2xl">
+      <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Enter Positions for Election</h2>
       
       <div class="mb-6">
-        <label for="electionTitle" class="block text-lg font-semibold mb-2">Election Title</label>
-        <input type="text" id="electionTitle" class="w-full px-4 py-2 border border-gray-300 rounded" placeholder="Enter the election title">
+        <label for="electionTitle" class="block text-lg font-semibold text-gray-700 mb-2">Election Title</label>
+        <input type="text" id="electionTitle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter the election title">
       </div>
       
       <div id="positionsContainer" class="mb-6">
-        <label for="positions" class="block text-lg font-semibold mb-2">Enter Positions</label>
-        <input type="text" id="position1" class="w-full px-4 py-2 border border-gray-300 rounded mb-2" placeholder="Enter a position (e.g., Chairman)">
-        <button id="addPositionBtn" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Another Position</button>
+        <label for="positions" class="block text-lg font-semibold text-gray-700 mb-2">Enter Positions</label>
+        <input type="text" id="position1" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a position (e.g., Chairman)">
+        <button id="addPositionBtn" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Add Another Position</button>
       </div>
       
-      <button onclick="goToCandidates()" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Next</button>
+      <button onclick="goToCandidates()" class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Next</button>
     </main>
   </div>
 
   <script>
     let positionCount = 1;
-    
+
     // Function to add another position input field
     document.getElementById('addPositionBtn').addEventListener('click', function() {
       positionCount++;
       const positionInput = document.createElement('input');
       positionInput.type = 'text';
       positionInput.id = 'position' + positionCount;
-      positionInput.className = 'w-full px-4 py-2 border border-gray-300 rounded mb-2';
+      positionInput.className = 'w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500';
       positionInput.placeholder = `Enter position ${positionCount}`;
       document.getElementById('positionsContainer').appendChild(positionInput);
     });

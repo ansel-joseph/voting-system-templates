@@ -8,29 +8,49 @@
 </head>
 
 <body class="bg-gray-100 text-gray-800">
-  <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold text-center mb-6">Review and Publish Election</h1>
-    
-    <!-- Election Positions and Candidates Review -->
-    <div id="election-review" class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">Positions and Candidates</h2>
-      <div id="positions-container"></div>
-    </div>
 
-    
+  <!-- Main Container -->
+  <div class="flex h-screen">
+    <!-- Sidebar (for future inclusion) -->
+    <!-- <aside class="w-64 bg-blue-500 text-white flex flex-col p-4 fixed h-screen">
+      <h1 class="text-2xl font-bold mb-6 text-center">Admin Panel</h1>
+      <nav class="flex-1">
+        <ul class="space-y-4">
+          <li><a href="host-dashboard.html" class="block hover:bg-blue-600 p-2 rounded">Dashboard</a></li>
+          <li><a href="host-manage-election.html" class="block hover:bg-blue-600 p-2 rounded">Manage Elections</a></li>
+          <li><a href="host-monitor-voting.html" class="block hover:bg-blue-600 p-2 rounded">Monitor Voting</a></li>
+          <li><a href="host-results.html" class="block hover:bg-blue-600 p-2 rounded">Results</a></li>
+          <li><a href="host-settings.html" class="block hover:bg-blue-600 p-2 rounded">Settings</a></li>
+        </ul>
+      </nav>
+      <a href="index.html" class="mt-auto bg-red-500 hover:bg-red-600 text-center py-2 px-4 rounded">Logout</a>
+    </aside>
 
-    <!-- Set Election Dates -->
-    <div class="mb-6">
-      <label for="start-date" class="block text-lg font-medium mb-2">Election Start Date</label>
-      <input type="date" id="start-date" class="block w-full p-2 border rounded mb-4">
-      <label for="end-date" class="block text-lg font-medium mb-2">Election End Date</label>
-      <input type="date" id="end-date" class="block w-full p-2 border rounded">
-    </div>
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-8 bg-white shadow-lg rounded-lg mt-6">
+      <h1 class="text-3xl font-semibold text-center mb-6 text-blue-600">Review and Publish Election</h1>
+      
+      <!-- Election Positions and Candidates Review -->
+      <div id="election-review" class="mb-8">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Positions and Candidates</h2>
+        <div id="positions-container" class="space-y-4"></div>
+      </div>
 
-    <!-- Publish Election Button -->
-    <div class="text-center mt-6">
-      <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" id="publish-election">Publish Election</button>
-    </div>
+      <!-- Set Election Dates -->
+      <div class="mb-6">
+        <label for="start-date" class="block text-lg font-medium mb-2 text-gray-700">Election Start Date</label>
+        <input type="date" id="start-date" class="block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <label for="end-date" class="block text-lg font-medium mb-2 text-gray-700 mt-4">Election End Date</label>
+        <input type="date" id="end-date" class="block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <!-- Publish Election Button -->
+      <div class="text-center mt-8">
+        <button class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200" id="publish-election">
+          Publish Election
+        </button>
+      </div>
+    </main>
   </div>
 
   <script>
@@ -42,11 +62,11 @@
     // Dynamically populate positions and their candidates
     positions.forEach(position => {
       const positionDiv = document.createElement('div');
-      positionDiv.className = 'mb-4';
+      positionDiv.className = 'mb-6 p-4 border rounded-lg shadow-sm bg-gray-50';
       positionDiv.innerHTML = `
-        <h3 class="text-lg font-semibold">${position}</h3>
-        <ul class="list-disc pl-6">
-          ${candidatesData[position].map(candidate => `<li>${candidate}</li>`).join('')}
+        <h3 class="text-lg font-semibold text-blue-600">${position}</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          ${candidatesData[position].map(candidate => `<li class="text-gray-700">${candidate}</li>`).join('')}
         </ul>
       `;
       positionsContainer.appendChild(positionDiv);
