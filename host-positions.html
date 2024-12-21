@@ -50,16 +50,11 @@
         }
       }
 
-      // Check if positions are entered
-      if (positions.length > 0) {
-        // Store the positions in localStorage
-        localStorage.setItem('positions', JSON.stringify(positions));
+      // Store the positions in local storage or send them via a form submission
+      localStorage.setItem('positions', JSON.stringify(positions));
 
-        // Redirect to the candidates page
-        window.location.href = 'host-candidates.html';
-      } else {
-        alert("Please enter at least one position.");
-      }
+      // Redirect to the candidates page
+      window.location.href = 'host-candidates.html';
     }
   </script>
 </body>
